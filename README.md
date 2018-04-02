@@ -1,7 +1,7 @@
 # PythonPy.org
+New website for Python Paraguay
 
-
-### Instalar
+### Install
 
 ```
 pip install virtualenv

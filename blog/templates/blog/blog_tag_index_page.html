@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+
+{% block content %}
+
+    {% if request.GET.tag|length %}
+        <h4>Mostrando posts etiquetados con "{{ request.GET.tag}}"</h4>
+    {% endif %}
+
+    {% for blogpage in blogpages %}
+    <p>
+        <strong><a href="{% pageurl blogpage %}">{{ blogpage.title }}</a></strong><br />
+        <small>Revisado:{{ blogpage.last_revision_created_at}}</small><br />
+        {% if blogpage.author %}
+          <p> Por {{ blogpage.author.profile}}</p>
+        {% endif %}
+    </p>
+
+    {% empty %}
+        No se encontraron posts con esa etiqueta.
+    {% endfor %}
+
+{% endblock %}
+
