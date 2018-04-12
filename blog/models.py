@@ -1,10 +1,10 @@
+from datetime import  datetime
 from django.db import models
 
 from modelcluster.fields import ParentalKey
 from modelcluster.contrib.taggit import ClusterTaggableManager
 from taggit.models import TaggedItemBase
 
-from .blocks import TwoColumnBlock
 from wagtail.core import blocks
 from wagtail.core.models import Page, Orderable
 from wagtail.core.fields import RichTextField, StreamField
@@ -12,8 +12,10 @@ from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, MultiFieldPanel
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.embeds.blocks import EmbedBlock
+from wagtail.contrib.table_block.blocks import TableBlock
 from wagtail.search import index
 
+from .blocks import TwoColumnBlock, CustomTableBlock
 
 class BlogIndexPage(Page):
     intro = RichTextField(blank=True)
@@ -53,7 +55,7 @@ class BlogPageTag(TaggedItemBase):
 # TODO create profile for authors
 
 class BlogPage(Page):
-    date = models.DateField("Post date")
+    date = models.DateField("Post date", default=datetime.today)
     excerpt = models.CharField(max_length=250)
     body = StreamField([
         ('heading', blocks.CharBlock(classname="full title")),
@@ -61,6 +63,8 @@ class BlogPage(Page):
         ('image', ImageChooserBlock()),
         ('two_columns', TwoColumnBlock()),
         ('embedded_video', EmbedBlock(icon="media")),
+        ('table', TableBlock()),
+        ('custom_table', CustomTableBlock()),
 
     ], null=True, blank=True)
     tags = ClusterTaggableManager(through=BlogPageTag, blank=True)
