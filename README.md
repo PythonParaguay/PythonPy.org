@@ -22,6 +22,9 @@ pip install -r requirements
 ./manage.py createsuperuser
 ./manage.py runserver
 ```
+To load sample data (Optional)
+
+`./manage.py loaddata test_data.json`
 
 ## TODO
 
