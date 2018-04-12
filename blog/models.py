@@ -4,10 +4,14 @@ from modelcluster.fields import ParentalKey
 from modelcluster.contrib.taggit import ClusterTaggableManager
 from taggit.models import TaggedItemBase
 
+from .blocks import TwoColumnBlock
+from wagtail.core import blocks
 from wagtail.core.models import Page, Orderable
-from wagtail.core.fields import RichTextField
-from wagtail.admin.edit_handlers import  FieldPanel, InlinePanel, MultiFieldPanel
+from wagtail.core.fields import RichTextField, StreamField
+from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, MultiFieldPanel, StreamFieldPanel, PageChooserPanel
 from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail.images.blocks import ImageChooserBlock
+from wagtail.embeds.blocks import EmbedBlock
 from wagtail.search import index
 
 
@@ -19,11 +23,12 @@ class BlogIndexPage(Page):
     ]
 
     def get_context(self, request):
-        #update context to include only published posts and in reverse order
+        # update context to include only published posts and in reverse order
         context = super().get_context(request)
         blogpages = self.get_children().live().order_by('-first_published_at')
         context['blogpages'] = blogpages
         return context
+
 
 class BlogTagIndexPage(Page):
 
@@ -31,10 +36,11 @@ class BlogTagIndexPage(Page):
         # filter by tag
         tag = request.GET.get('tag')
         blogpages = BlogPage.objects.filter(tags__name=tag)
-        #update context
+        # update context
         context = super().get_context(request)
         context['blogpages'] = blogpages
         return context
+
 
 class BlogPageTag(TaggedItemBase):
     content_object = ParentalKey(
@@ -43,12 +49,20 @@ class BlogPageTag(TaggedItemBase):
         on_delete=models.CASCADE
     )
 
-#TODO create profile for authors
+
+# TODO create profile for authors
 
 class BlogPage(Page):
     date = models.DateField("Post date")
-    intro = models.CharField(max_length=250)
-    body = RichTextField(blank=True)
+    excerpt = models.CharField(max_length=250)
+    body = StreamField([
+        ('heading', blocks.CharBlock(classname="full title")),
+        ('paragraph', blocks.RichTextBlock()),
+        ('image', ImageChooserBlock()),
+        ('two_columns', TwoColumnBlock()),
+        ('embedded_video', EmbedBlock(icon="media")),
+
+    ], null=True, blank=True)
     tags = ClusterTaggableManager(through=BlogPageTag, blank=True)
 
     def main_image(self):
@@ -58,7 +72,7 @@ class BlogPage(Page):
         return None
 
     search_fields = Page.search_fields + [
-        index.SearchField('intro'),
+        index.SearchField('excerpt'),
         index.SearchField('body'),
     ]
 
@@ -68,10 +82,11 @@ class BlogPage(Page):
             FieldPanel('tags'),
         ], heading="Blog info"),
 
-        FieldPanel('intro'),
-        FieldPanel('body', classname="full"),
+        FieldPanel('excerpt'),
+        StreamFieldPanel('body', classname="full"),
         InlinePanel('gallery_images', label="Gallery Images"),
     ]
+
 
 class BlogPageGalleryImage(Orderable):
     page = ParentalKey(BlogPage, on_delete=models.CASCADE, related_name='gallery_images')
