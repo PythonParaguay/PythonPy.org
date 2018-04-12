@@ -8,14 +8,16 @@ from taggit.models import TaggedItemBase
 from wagtail.core import blocks
 from wagtail.core.models import Page, Orderable
 from wagtail.core.fields import RichTextField, StreamField
-from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, MultiFieldPanel, StreamFieldPanel, PageChooserPanel
+from wagtail.admin.edit_handlers import (FieldPanel, InlinePanel, MultiFieldPanel,
+                                         StreamFieldPanel, PageChooserPanel)
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.embeds.blocks import EmbedBlock
 from wagtail.contrib.table_block.blocks import TableBlock
 from wagtail.search import index
 
-from .blocks import TwoColumnBlock, CustomTableBlock
+from .blocks import (TwoColumnBlock, CustomTableBlock,
+                     ThumbnailBlock)
 
 class BlogIndexPage(Page):
     intro = RichTextField(blank=True)
@@ -56,7 +58,7 @@ class BlogPageTag(TaggedItemBase):
 
 class BlogPage(Page):
     date = models.DateField("Post date", default=datetime.today)
-    excerpt = models.CharField(max_length=250)
+    excerpt = models.CharField('Extracto', max_length=250, blank=True)
     body = StreamField([
         ('heading', blocks.CharBlock(classname="full title")),
         ('paragraph', blocks.RichTextBlock()),
@@ -65,6 +67,7 @@ class BlogPage(Page):
         ('embedded_video', EmbedBlock(icon="media")),
         ('table', TableBlock()),
         ('custom_table', CustomTableBlock()),
+        ('thumbnail', ThumbnailBlock()),
 
     ], null=True, blank=True)
     tags = ClusterTaggableManager(through=BlogPageTag, blank=True)

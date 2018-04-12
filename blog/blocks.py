@@ -4,6 +4,18 @@ from wagtail.embeds.blocks import EmbedBlock
 from wagtail.contrib.table_block.blocks import TableBlock
 
 
+class ThumbnailBlock(blocks.StructBlock):
+    """A block that combines a thumbnail and a caption,
+        both of which link to a URL"""
+    image = ImageChooserBlock(required=False)
+    url = blocks.URLBlock()
+    media_type = blocks.CharBlock()
+    text = blocks.CharBlock()
+
+    class Meta:
+        icon = 'doc-empty'
+
+
 class CustomTableBlock(blocks.StructBlock):
     """A custom table"""
     custom_table_options = {
