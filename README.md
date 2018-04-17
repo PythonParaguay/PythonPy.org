@@ -25,8 +25,7 @@ pip install -r requirements
 To load sample data (Optional)
 
 ```
-./manage.py loaddata --app home test_home.json
-./manage.py loaddata --app blog test_blog.json
+./manage.py loaddata test_data.json
 ```
 
 ## TODO
