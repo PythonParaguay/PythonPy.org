@@ -1,11 +1,25 @@
 {% extends "base.html" %}
 
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load wagtailcore_tags wagtailimages_tags static %}
 
-{% block body_class %}template-blogpage {% endblock %}
+{% block body_class %}profile-page sidebar-collapse{% endblock %}
 
 {% block content %}
-    <h1>{{page.title}}</h1>
+    <div class="page-header header-filter" data-parallax="true" style="background-image: url('{% static '/assets/img/bg.jpg' %}')">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 ml-auto mr-auto">
+          <div class="brand text-center">
+            <h2>{{page.title}}</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+   </div>
+    <div class="main main-raised">
+    <div class="container">
+    <div class="section">
+    <h1 class="title">{{page.title}}</h1>
     <p class="meta"> {{page.date}}</p>
     <div class="intro">{{page.excerpt}}</div>
 
@@ -27,4 +41,7 @@
     </div>
 {% endif %}
     <p><a href="{{page.get_parent.url}}">Return to blog</a> </p>
+     </div>
+    </div>
+  </div>
 {% endblock %}

@@ -2,8 +2,8 @@
 {% get_site_root as site_root %}
 
 {# Implementation of bootstrap theme dropdown menu - shows top level links and their children #}
-<div role="navigation" class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
+{#<div role="navigation" class="navbar navbar-inverse navbar-fixed-top">#}
+{#    <div class="container">#}
 {#        <div class="navbar-header">#}
 {#            <button data-target=".navbar-collapse" data-toggle="collapse" class="navbar-toggle" type="button">#}
 {#                <span class="sr-only">Toggle navigation</span>#}
@@ -17,18 +17,19 @@
 {#            </a>#}
 {#        </div>#}
 {#        <div class="navbar-collapse collapse">#}
-            <ul class="nav navbar-nav">
+{#            <ul class="navbar-nav ml-auto">#}
                 {% for menuitem in menuitems %}
-                    <li class="{% if menuitem.show_dropdown %}dropdown{% endif %}{% if menuitem.active %} active{% endif %}">
+                    <li class="{% if menuitem.show_dropdown %}dropdown nav-item{% else %}nav-item{% endif %}{% if menuitem.active %} active{% endif %}">
                         {% if menuitem.show_dropdown %}
-                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">{{ menuitem.title }} <b class="caret"></b></a>
+
+                            <a data-toggle="dropdown" class="dropdown-toggle nav-link" href="#">{{ menuitem.title }} <b class="caret"></b></a>
                             {% top_menu_children parent=menuitem %}
                         {% else %}
-                            <a href="{% pageurl menuitem %}">{{ menuitem.title }}</a>
+                            <a href="{% pageurl menuitem %}" class="nav-link">{{ menuitem.title }}</a>
                         {% endif %}
                     </li>       
                 {% endfor %}
-            </ul>
+{#            </ul>#}
 {#            <form class="navbar-form navbar-right" role="search" action="{% url 'search' %}" method="get">#}
 {#                <div class="input-group">#}
 {#                    <input type="text" name="query" class="form-control" placeholder="Search…" value="{{ search_query }}" />#}
@@ -40,5 +41,5 @@
 {#                </div>#}
 {#            </form>#}
 {#        </div>#}
-    </div>
-</div>
+{#    </div>#}
+{#</div>#}
