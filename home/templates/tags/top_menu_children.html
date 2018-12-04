@@ -1,9 +1,9 @@
 {% load home_tags wagtailcore_tags %}
 
-<ul class="dropdown-menu">
+<ul class="dropdown-menu dropdown-with-icons">
     {# Include link to parent because the parent link is a drop down #}
-    <li><a href="{% pageurl parent %}">{{ parent.title }}</a></li>
+    <li><a href="{% pageurl parent %}"><i class="material-icons">layers</i>  {{ parent.title }}</a></li>
     {% for child in menuitems_children %}
-        <li><a href="{% pageurl child %}">{{ child.title }}</a></li>
+        <li><a href="{% pageurl child %}"><i class="material-icons">layers</i>  {{ child.title }}</a></li>
     {% endfor %}
 </ul>

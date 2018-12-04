@@ -1,12 +1,36 @@
 {% extends "base.html" %}
 
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags static %}
 
-{% block body_class %}template-homepage{% endblock %}
+{% block body_class %}profile-page sidebar-collapse{% endblock %}
 
 {% block content %}
-    <h1>{{page.title}}</h1>
-    {{ page.body}}
-    <p><a href="{{page.get_parent.url}}">Regresar</a> </p>
+   <div class="page-header header-filter" data-parallax="true" style="background-image: url('{% static '/assets/img/bg2.jpg' %}')">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 ml-auto mr-auto">
+          <div class="brand text-center">
+            <h2>{{page.title}}</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+   </div>
+    <div class="main main-raised">
+    <div class="profile-content">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 ml-auto mr-auto">
+          </div>
+        </div>
+        <div class="description">
+          {{ page.body }}
+        </div>
+      </div>
+    </div>
+  </div>
+{#    <h1>{{page.title}}</h1>#}
+{#    {{ page.body}}#}
+{#    <p><a href="{{page.get_parent.url}}">Regresar</a> </p>#}
 {% endblock %}
 

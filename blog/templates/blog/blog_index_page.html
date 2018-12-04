@@ -1,13 +1,26 @@
 {% extends "base.html" %}
 
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load wagtailcore_tags wagtailimages_tags static %}
 
-{% block body_class %}template-blogindexpage{% endblock %}
+{% block body_class %}profile-page sidebar-collapse{% endblock %}
 
 {% block content %}
-    <h1>{{ page.title }}</h1>
-
-    <div class="intro">{{ page.intro|richtext}} </div>
+    <div class="page-header header-filter" data-parallax="true" style="background-image: url('{% static '/assets/img/bg3.jpg' %}')">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 ml-auto mr-auto">
+          <div class="brand text-center">
+            <h2>{{page.title}}</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+   </div>
+    <div class="main main-raised">
+    <div class="container">
+      <div class="section">
+{#        <h2 class="title">Your main section here</h2>#}
+          <div class="title">{{ page.intro|richtext}} </div>
     {% for post in blogpages %}
         {%with post=post.specific %}
             <h2><a href="{% pageurl post%}"> {{ post.title }}</a> </h2>
@@ -20,5 +33,11 @@
 
         {% endwith %}
     {% endfor %}
+      </div>
+    </div>
+  </div>
+{#    <h1>{{ page.title }}</h1>#}
+
+
 
 {% endblock %}
