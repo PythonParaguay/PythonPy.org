@@ -25,7 +25,6 @@
 {#  <link href="../assets/css/material-kit.css?v=2.0.4" rel="stylesheet" />#}
   <link href="{% static "assets/css/material-kit.css" %}" rel="stylesheet" />
 
-  <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="{% static "/css/pythonpyorg.css" %}" rel="stylesheet" />
  {% block extra_css %}
             {# Override this in templates to add extra stylesheets #}
@@ -37,7 +36,7 @@
     <div class="container">
       <div class="navbar-translate">
         <a class="navbar-brand" href="/">
-          <img src="{% static "assets/img/logo-intro.png" %}" width="100px" height="100px"> Python Paraguay </a>
+          <img src="{% static "assets/img/logo-intro.png" %}" width="100px" height="100px" class="img-shadow"> Python Paraguay </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="sr-only">Toggle navigation</span>
           <span class="navbar-toggler-icon"></span>
