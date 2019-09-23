@@ -3,19 +3,17 @@ New website for Python Paraguay
 
 ### Prerequisites
 * Python >= 3.6
-* Virtualenv
 
 ### Dependencies
-* Django >=2.0
-* Wagtail >=2.0
+* Django >=2.2
+* Wagtail >=2.6
 
 ### Getting started
 
 ```
 git clone git@github.com:PythonParaguay/PythonPy.org.git
 cd PythonPy.org
-pip install virtualenv
-virtualenv -p python3 env
+python3 -m venv env
 source env/bin/activate
 pip install -r requirements
 ./manage.py migrate
@@ -30,7 +28,7 @@ To load sample data (Optional)
 
 ## TODO
 
-- Frontend
+- ~~Proper~~ frontend
 - Unit tests
 - Documentation
 
