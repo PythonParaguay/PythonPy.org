@@ -1,6 +1,6 @@
 
 
-django>=2.2.4
+django>=2.2.5
 
-wagtail>=2.6.1
+wagtail>=2.6.2
 
