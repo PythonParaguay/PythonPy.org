@@ -3,6 +3,7 @@ New website for Python Paraguay
 
 ### Prerequisites
 * Python >= 3.6
+* PostgreSQL >= 10+
 
 ### Dependencies
 * Django >=2.2
@@ -10,12 +11,30 @@ New website for Python Paraguay
 
 ### Getting started
 
-```
+```bash
 git clone git@github.com:PythonParaguay/PythonPy.org.git
 cd PythonPy.org
 python3 -m venv env
 source env/bin/activate
 pip install -r requirements
+
+```
+### Environment variables
+
+You can edit and rename `dotenv.example` to `.env` and it would load at the start.
+If you choose other method you're gonna need to define this this environment variables:
+```bash
+DB_NAME_DEV="pythonpy_dev"
+DB_USER_DEV=""
+DB_PASSW_DEV=""
+DB_HOST_DEV="localhost"
+DB_HOST_PORT="5432"
+SECRET_KEY_DEV="CHANGE_THIS_PUT_A_50_CHAR_RANDOM_STRING"
+```
+
+### First run
+
+```bash
 ./manage.py migrate
 ./manage.py createsuperuser
 ./manage.py runserver
@@ -25,6 +44,7 @@ To load sample data (Optional)
 ```
 ./manage.py loaddata test_data.json
 ```
+
 
 ## TODO
 

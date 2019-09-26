@@ -1,0 +1,20 @@
+# Rename this file to .env
+
+# Development environment variables
+
+DB_NAME_DEV="pythonpy_dev"
+DB_USER_DEV=""
+DB_PASSW_DEV=""
+DB_HOST_DEV="localhost"
+DB_HOST_PORT="5432"
+SECRET_KEY_DEV="CHANGE_THIS_PUT_A_50_CHAR_RANDOM_STRING"
+
+# Poduction environment variables
+
+DB_NAME_PROD="pythonpy_prod"
+DB_USER_PROD=""
+DB_PASSW_PROD=""
+DB_HOST_PROD="localhost"
+DB_HOST_PORT="5432"
+SECRET_KEY_PROD="CHANGE_THIS_PUT_A_50_CHAR_RANDOM_STRING"
+
