@@ -16,13 +16,13 @@ git clone git@github.com:PythonParaguay/PythonPy.org.git
 cd PythonPy.org
 python3 -m venv env
 source env/bin/activate
-pip install -r requirements
+pip install -r requirements.txt
 
 ```
 ### Environment variables
 
 You can edit and rename `dotenv.example` to `.env` and it would load at the start.
-If you choose other method you're gonna need to define this this environment variables:
+If you choose other method you're gonna need to define a few environment variables:
 ```bash
 DB_NAME_DEV="pythonpy_dev"
 DB_USER_DEV=""
